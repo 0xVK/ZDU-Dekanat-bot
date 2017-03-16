@@ -6,9 +6,7 @@ import requests
 import re
 import telebot
 import datetime
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+
 
 # print(re.sub('\((.*?)\)', '', l))
 
