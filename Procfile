@@ -1,1 +1,1 @@
-web: python scheduler_bot.py
+web: python test.py
