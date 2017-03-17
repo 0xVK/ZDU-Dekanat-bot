@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-
 import urllib
 from bs4 import BeautifulSoup
 import requests
 import re
 import telebot
 import datetime
-
+import os
+from flask import Flask, request
 
 # print(re.sub('\((.*?)\)', '', l))
 
@@ -260,10 +260,26 @@ def show_other_group(message):
     bot.send_message(message.chat.id, rozklad_for_today)
 
 
+#  ____________________________________________________SERVER__________________________________________________________
+server = Flask(__name__)
+
+
+@server.route("/bot", methods=['POST'])
+def get_new_updates():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
+
+
+@server.route("/")
+def set_webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url="https://fathomless-everglades-21175.herokuapp.com/bot")
+    return "!", 200
+
+
 def main():
 
-    bot.polling()
-
+    server.run(host="0.0.0.0", port=os.environ.get('PORT', 5000))
 
 if __name__ == '__main__':
     main()
