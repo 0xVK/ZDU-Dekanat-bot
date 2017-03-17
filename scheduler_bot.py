@@ -194,8 +194,9 @@ def menu_action(message):
         bot.send_message(message.chat.id, msg)
 
     elif message.text == 'Інформація':
-        bot.send_message(message.chat.id, 'Бот знаходиться в розробці це ще тестова версія.\n'
-                                          'Контакти автора:\n Телеграм: Koocherov, \n VK: vk.com/koocherov')
+        bot.send_message(message.chat.id, 'Бот знаходиться в розробці це поки перша - тестова версія.\n'
+                                          'Пропозиції щодо покращення, повідомлення про баги сюди :\n '
+                                          'Телеграм: @Koocherov, \n VK: vk.com/koocherov')
 
     elif message.text == 'Розклад іншої групи':
         sent = bot.send_message(message.chat.id,
@@ -250,7 +251,7 @@ def show_other_group(message):
     group = message.text
     rozklad_data = get_rozklad(group=group)
 
-    rozklad_for_today = '[Розклад на сьогодні групи {}\n]'.format(message.text)
+    rozklad_for_today = '[Розклад на сьогодні групи {}]:\n'.format(message.text)
 
     if rozklad_data:
         rozklad_for_today += show_day_rozklad(rozklad_data[0])
